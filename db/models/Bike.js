@@ -69,4 +69,4 @@ const bikeSchema = new mongoose.Schema({
 // Text index for smart search matching
 bikeSchema.index({ brand: 'text', model: 'text', category: 'text', tags: 'text' });
 
-module.exports = mongoose.model('Bike', bikeSchema);
+module.exports = mongoose.models.Bike || mongoose.model('Bike', bikeSchema);
