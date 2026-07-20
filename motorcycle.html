@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motorcycles – RideEx</title>
+    <meta name="description"
+        content="Browse and search India's best motorcycles. Filter by brand, engine, price, and more." />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .page-hero {
+            padding: 7rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(255, 77, 0, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            margin-bottom: 0.75rem;
+        }
+
+        .page-hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .builder-cta-banner {
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .builder-cta-card {
+            background: linear-gradient(135deg, rgba(255, 77, 0, 0.1), rgba(255, 149, 0, 0.05));
+            border: 1px solid var(--border-accent);
+            border-radius: var(--radius);
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .builder-cta-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .builder-cta-text p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .controls-row .search-container {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .sort-btn {
+            padding: 0.6rem 1rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .sort-btn.active {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .category-pills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-pill {
+            padding: 0.4rem 1rem;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .category-pill.active {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">🏍</div>
+            <span class="nav-logo-text">RideEx</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="motorcycle.html" style="color:var(--accent)">Motorcycles</a></li>
+            <li><a href="scooter.html">Scooters</a></li>
+            <li><a href="builder.html">Build Your Bike</a></li>
+        </ul>
+        <a href="builder.html" class="btn btn-primary" style="padding:0.6rem 1.25rem; font-size:0.85rem;">⚙️ Build Your
+            Bike</a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="page-hero">
+        <div class="page-hero-bg"></div>
+        <div class="page-hero-content">
+            <a href="index.html" class="back-btn">← Back to Home</a>
+            <div class="section-tag">🏍 Motorcycles</div>
+            <h1>Find Your <span class="gradient-text">Motorcycle</span></h1>
+            <p>Browse 15 motorcycles from India's top brands. Use filters to narrow down your perfect ride.</p>
+        </div>
+    </div>
+
+    <!-- BUILDER CTA -->
+    <div class="builder-cta-banner">
+        <div class="builder-cta-card">
+            <div class="builder-cta-text">
+                <h3>⚙️ Can't find what you want?</h3>
+                <p>Use our interactive bike builder to customize specs and find bikes that match your exact
+                    requirements.</p>
+            </div>
+            <a href="builder.html" class="btn btn-primary" id="go-to-builder-btn">Build Your Bike →</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <!-- Controls -->
+        <div class="controls-row">
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="search-input"
+                    placeholder="Search by brand, model, or style..." />
+            </div>
+            <select class="filter-select" id="sort-select">
+                <option value="default">Sort: Default</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+                <option value="mileage">Best Mileage</option>
+                <option value="power">Most Powerful</option>
+            </select>
+            <select class="filter-select" id="price-filter">
+                <option value="">All Prices</option>
+                <option value="0-150000">Under ₹1.5L</option>
+                <option value="150000-300000">₹1.5L – ₹3L</option>
+                <option value="300000-1000000">₹3L – ₹10L</option>
+                <option value="1000000-99999999">Above ₹10L</option>
+            </select>
+        </div>
+
+        <!-- Category Pills -->
+        <div class="category-pills" id="category-pills">
+            <div class="category-pill active" data-cat="">All</div>
+            <div class="category-pill" data-cat="commuter">Commuter</div>
+            <div class="category-pill" data-cat="sport">Sport</div>
+            <div class="category-pill" data-cat="classic">Classic</div>
+            <div class="category-pill" data-cat="roadster">Roadster</div>
+            <div class="category-pill" data-cat="cruiser">Cruiser</div>
+            <div class="category-pill" data-cat="superbike">Superbike</div>
+        </div>
+
+        <!-- Results count -->
+        <div class="results-count" id="results-count"></div>
+
+        <!-- Bikes Grid -->
+        <div class="bikes-grid" id="bikes-grid"></div>
+    </div>
+
+    <!-- POPUP -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-card" id="popup-card">
+            <button class="popup-close" id="popup-close" aria-label="Close">✕</button>
+            <div class="popup-gallery">
+                <img id="popup-img" src="" alt="Bike" />
+                <div class="popup-gallery-overlay"></div>
+            </div>
+            <div class="popup-body">
+                <div class="popup-header">
+                    <div class="popup-brand" id="popup-brand"></div>
+                    <div class="popup-name" id="popup-name"></div>
+                    <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-top:0.5rem;">
+                        <div class="popup-price" id="popup-price"></div>
+                        <div class="popup-overall-rating">
+                            <span class="stars" id="popup-stars"></span>
+                            <span class="rating-num" id="popup-rating-num"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Variant Selector -->
+                <div style="margin-bottom:1rem;">
+                    <div
+                        style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem; font-weight:600;">
+                        Variant</div>
+                    <div class="variant-selector" id="popup-variants"></div>
+                </div>
+
+                <!-- Color Picker -->
+                <div style="margin-bottom:1.5rem;">
+                    <div
+                        style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem; font-weight:600;">
+                        Color</div>
+                    <div class="color-picker" id="popup-colors"></div>
+                    <div class="color-name" id="popup-color-name"></div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="popup-tabs">
+                    <button class="popup-tab active" data-tab="specs" id="tab-specs">Specs</button>
+                    <button class="popup-tab" data-tab="ratings" id="tab-ratings">Ratings</button>
+                    <button class="popup-tab" data-tab="reviews" id="tab-reviews">Reviews</button>
+                    <button class="popup-tab" data-tab="proscons" id="tab-proscons">Pros & Cons</button>
+                </div>
+
+                <div class="popup-tab-content active" id="tab-content-specs">
+                    <div class="specs-grid" id="popup-specs-grid"></div>
+                </div>
+                <div class="popup-tab-content" id="tab-content-ratings">
+                    <div class="feature-ratings" id="popup-ratings"></div>
+                </div>
+                <div class="popup-tab-content" id="tab-content-reviews">
+                    <div class="reviews-list" id="popup-reviews"></div>
+                </div>
+                <div class="popup-tab-content" id="tab-content-proscons">
+                    <div class="pros-cons">
+                        <ul class="pros-list" id="popup-pros"></ul>
+                        <ul class="cons-list" id="popup-cons"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/popup.js"></script>
+    <script src="js/results.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        // Initialize with motorcycle data
+        initResultsPage('motorcycle');
+
+        // Dynamic stats update
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof BIKES_DB !== 'undefined') {
+                const motorcycles = BIKES_DB.filter(b => b.type === 'motorcycle');
+                const total = motorcycles.length;
+                const brands = new Set(motorcycles.map(b => b.brand)).size;
+                const heroDesc = document.querySelector('.page-hero p');
+                if (heroDesc) {
+                    heroDesc.textContent = `Browse ${total} motorcycles from India's ${brands} top brands. Use filters to narrow down your perfect ride.`;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

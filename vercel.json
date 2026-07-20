@@ -1,0 +1,49 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "css/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "js/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "Sports/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "Commuter/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "Cruiser/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "OffRoad/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "Scooter/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/api/bikes/(.*)", "dest": "/api/bikes/[id].js?id=$1" },
+    { "src": "/api/bikes", "dest": "/api/bikes/index.js" },
+    { "src": "/api/brands", "dest": "/api/brands.js" },
+    { "src": "/api/body-types", "dest": "/api/body-types.js" },
+    { "src": "/api/stats", "dest": "/api/stats.js" },
+    { "src": "/api/search/(.*)", "dest": "/api/search/[query].js?query=$1" }
+  ]
+}

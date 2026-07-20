@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build Your Bike – RideEx</title>
+    <meta name="description" content="Customize your ideal motorcycle with RideEx's interactive bike builder." />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/builder.css" />
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">🏍</div>
+            <span class="nav-logo-text">RideEx</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="motorcycle.html">Motorcycles</a></li>
+            <li><a href="scooter.html">Scooters</a></li>
+            <li><a href="builder.html" style="color:var(--accent)">Build Your Bike</a></li>
+        </ul>
+        <a href="motorcycle.html" class="btn btn-secondary" style="padding:0.6rem 1.25rem; font-size:0.85rem;">Browse
+            All</a>
+    </nav>
+
+    <div class="builder-page">
+        <!-- HEADER -->
+        <div class="builder-header">
+            <a href="motorcycle.html" class="back-btn">← Back to Motorcycles</a>
+            <div class="section-tag">⚙️ Interactive Builder</div>
+            <h1 style="margin-bottom:0.5rem;">Build Your <span class="gradient-text">Dream Bike</span></h1>
+            <p style="color:var(--text-secondary); max-width:500px; margin:0 auto;">Click on any part of the bike to
+                customize it. We'll find real bikes that match your configuration.</p>
+        </div>
+
+        <!-- BUILDER LAYOUT -->
+        <div class="builder-layout">
+            <!-- LEFT: Bike Canvas -->
+            <div>
+                <!-- Progress Steps -->
+                <div class="progress-steps" id="progress-steps"></div>
+
+                <!-- Bike Canvas -->
+                <div class="bike-canvas">
+                    <div class="bike-svg-wrapper" id="bike-svg-wrapper">
+                        <!-- SVG Bike Illustration -->
+                        <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" id="bike-svg">
+                            <!-- Ground shadow -->
+                            <ellipse cx="350" cy="360" rx="280" ry="12" fill="rgba(0,0,0,0.3)" />
+
+                            <!-- Rear wheel -->
+                            <circle cx="175" cy="300" r="75" fill="none" stroke="#333" stroke-width="18" />
+                            <circle cx="175" cy="300" r="65" fill="none" stroke="#222" stroke-width="4" />
+                            <circle cx="175" cy="300" r="20" fill="#2a2a2a" stroke="#444" stroke-width="3" />
+                            <!-- Rear spokes -->
+                            <g stroke="#333" stroke-width="2" opacity="0.6">
+                                <line x1="175" y1="235" x2="175" y2="280" />
+                                <line x1="175" y1="320" x2="175" y2="365" />
+                                <line x1="110" y1="300" x2="155" y2="300" />
+                                <line x1="195" y1="300" x2="240" y2="300" />
+                                <line x1="129" y1="254" x2="161" y2="286" />
+                                <line x1="189" y1="314" x2="221" y2="346" />
+                                <line x1="221" y1="254" x2="189" y2="286" />
+                                <line x1="161" y1="314" x2="129" y2="346" />
+                            </g>
+
+                            <!-- Front wheel -->
+                            <circle cx="525" cy="300" r="75" fill="none" stroke="#333" stroke-width="18" />
+                            <circle cx="525" cy="300" r="65" fill="none" stroke="#222" stroke-width="4" />
+                            <circle cx="525" cy="300" r="20" fill="#2a2a2a" stroke="#444" stroke-width="3" />
+                            <!-- Front spokes -->
+                            <g stroke="#333" stroke-width="2" opacity="0.6">
+                                <line x1="525" y1="235" x2="525" y2="280" />
+                                <line x1="525" y1="320" x2="525" y2="365" />
+                                <line x1="460" y1="300" x2="505" y2="300" />
+                                <line x1="545" y1="300" x2="590" y2="300" />
+                                <line x1="479" y1="254" x2="511" y2="286" />
+                                <line x1="539" y1="314" x2="571" y2="346" />
+                                <line x1="571" y1="254" x2="539" y2="286" />
+                                <line x1="511" y1="314" x2="479" y2="346" />
+                            </g>
+
+                            <!-- Chain/swingarm -->
+                            <path d="M175 300 Q220 310 265 295" fill="none" stroke="#333" stroke-width="6" />
+
+                            <!-- Frame (main) -->
+                            <path d="M265 295 L290 200 L380 160 L450 170 L480 200 L490 270" fill="none" stroke="#ff4d00"
+                                stroke-width="8" stroke-linecap="round" id="frame-path" class="bike-part-highlight" />
+
+                            <!-- Sub-frame -->
+                            <path d="M290 200 L240 230 L175 300" fill="none" stroke="#cc3300" stroke-width="6"
+                                stroke-linecap="round" />
+
+                            <!-- Engine block -->
+                            <rect x="255" y="230" width="130" height="80" rx="8" fill="#1e1e2e" stroke="#ff4d00"
+                                stroke-width="2" id="engine-rect" class="bike-part-highlight" />
+                            <rect x="265" y="240" width="110" height="60" rx="6" fill="#252535" stroke="#333"
+                                stroke-width="1" />
+                            <!-- Engine details -->
+                            <rect x="275" y="248" width="30" height="44" rx="4" fill="#1a1a2a" stroke="#444"
+                                stroke-width="1" />
+                            <rect x="315" y="248" width="30" height="44" rx="4" fill="#1a1a2a" stroke="#444"
+                                stroke-width="1" />
+                            <rect x="355" y="248" width="25" height="44" rx="4" fill="#1a1a2a" stroke="#444"
+                                stroke-width="1" />
+
+                            <!-- Exhaust -->
+                            <path d="M265 290 Q230 295 210 310 Q195 320 185 330" fill="none" stroke="#888"
+                                stroke-width="10" stroke-linecap="round" id="exhaust-path"
+                                class="bike-part-highlight" />
+                            <path d="M265 290 Q230 295 210 310 Q195 320 185 330" fill="none" stroke="#555"
+                                stroke-width="6" stroke-linecap="round" />
+                            <ellipse cx="182" cy="332" rx="8" ry="5" fill="#666" transform="rotate(-30 182 332)" />
+
+                            <!-- Fuel tank -->
+                            <path d="M310 140 Q350 120 400 130 L450 170 L380 160 Z" fill="#cc3300" stroke="#ff4d00"
+                                stroke-width="2" id="tank-path" class="bike-part-highlight" />
+                            <path d="M330 145 Q360 130 400 138" fill="none" stroke="rgba(255,255,255,0.2)"
+                                stroke-width="2" />
+
+                            <!-- Seat -->
+                            <path d="M240 200 Q290 185 380 165 L380 180 Q290 200 240 215 Z" fill="#1a1a1a" stroke="#333"
+                                stroke-width="1" id="seat-path" class="bike-part-highlight" />
+                            <path d="M380 165 L450 175 L450 188 L380 180 Z" fill="#222" stroke="#333"
+                                stroke-width="1" />
+
+                            <!-- Front fork / suspension -->
+                            <line x1="490" y1="200" x2="525" y2="300" stroke="#555" stroke-width="10"
+                                stroke-linecap="round" id="fork-line" class="bike-part-highlight" />
+                            <line x1="480" y1="195" x2="515" y2="295" stroke="#666" stroke-width="6"
+                                stroke-linecap="round" />
+                            <!-- Fork spring detail -->
+                            <line x1="495" y1="215" x2="498" y2="225" stroke="#777" stroke-width="2" />
+                            <line x1="498" y1="225" x2="495" y2="235" stroke="#777" stroke-width="2" />
+                            <line x1="495" y1="235" x2="498" y2="245" stroke="#777" stroke-width="2" />
+
+                            <!-- Rear suspension -->
+                            <line x1="265" y1="295" x2="310" y2="230" stroke="#555" stroke-width="8"
+                                stroke-linecap="round" id="rear-susp-line" class="bike-part-highlight" />
+
+                            <!-- Handlebar -->
+                            <path d="M470 165 Q490 155 510 160 Q520 163 515 170" fill="none" stroke="#555"
+                                stroke-width="8" stroke-linecap="round" id="handlebar-path"
+                                class="bike-part-highlight" />
+                            <circle cx="515" cy="170" r="5" fill="#333" />
+
+                            <!-- Headlight -->
+                            <ellipse cx="540" cy="195" rx="22" ry="16" fill="#1a1a2e" stroke="#ff9500" stroke-width="2"
+                                id="headlight-ellipse" class="bike-part-highlight" />
+                            <ellipse cx="540" cy="195" rx="14" ry="10" fill="rgba(255,200,100,0.15)" />
+                            <ellipse cx="540" cy="195" rx="8" ry="6" fill="rgba(255,200,100,0.3)" />
+
+                            <!-- Tail light -->
+                            <rect x="215" y="188" width="20" height="10" rx="3" fill="#cc0000" stroke="#ff0000"
+                                stroke-width="1" id="taillight-rect" class="bike-part-highlight" />
+
+                            <!-- Brake disc front -->
+                            <circle cx="525" cy="300" r="35" fill="none" stroke="#444" stroke-width="3"
+                                stroke-dasharray="8 4" id="front-brake-disc" class="bike-part-highlight" />
+
+                            <!-- Brake disc rear -->
+                            <circle cx="175" cy="300" r="35" fill="none" stroke="#444" stroke-width="3"
+                                stroke-dasharray="8 4" id="rear-brake-disc" class="bike-part-highlight" />
+
+                            <!-- Instrument cluster -->
+                            <rect x="460" y="148" width="30" height="18" rx="4" fill="#0a0a1a" stroke="#ff4d00"
+                                stroke-width="1.5" id="cluster-rect" class="bike-part-highlight" />
+                            <rect x="463" y="151" width="24" height="12" rx="2" fill="#001a00" />
+                            <text x="475" y="160" font-size="5" fill="#00ff00" text-anchor="middle"
+                                font-family="monospace">88</text>
+
+                            <!-- Footpeg -->
+                            <rect x="255" y="305" width="25" height="6" rx="2" fill="#333" stroke="#555"
+                                stroke-width="1" />
+                            <rect x="420" y="305" width="25" height="6" rx="2" fill="#333" stroke="#555"
+                                stroke-width="1" />
+                        </svg>
+
+                        <!-- HOTSPOTS -->
+                        <div class="hotspot" id="hotspot-engine" style="left:38%; top:62%;" data-part="engine">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Engine</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-frame" style="left:50%; top:45%;" data-part="frame">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Frame</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-suspension" style="left:70%; top:55%;" data-part="suspension">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Suspension</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-brakes" style="left:75%; top:78%;" data-part="brakes">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Brakes</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-wheels" style="left:25%; top:78%;" data-part="wheels">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Wheels</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-fuel" style="left:55%; top:38%;" data-part="fuel">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Fuel System</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-exhaust" style="left:28%; top:82%;" data-part="exhaust">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Exhaust</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-seat" style="left:42%; top:42%;" data-part="seat">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Seat</div>
+                        </div>
+                        <div class="hotspot" id="hotspot-lights" style="left:78%; top:48%;" data-part="lights">
+                            <div class="hotspot-dot"></div>
+                            <div class="hotspot-label">Lights</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="builder-instruction">
+                    <span>👆</span> Click on a glowing dot to customize that part
+                </div>
+            </div>
+
+            <!-- RIGHT: Options Panel -->
+            <div class="options-panel">
+                <div class="options-panel-header">
+                    <div class="options-panel-title" id="panel-title">Select a Part</div>
+                    <div class="options-panel-subtitle" id="panel-subtitle">Click any hotspot on the bike to start
+                        customizing</div>
+                </div>
+                <div class="options-panel-body" id="options-panel-body">
+                    <!-- Default state -->
+                    <div id="default-panel" style="text-align:center; padding:2rem 1rem; color:var(--text-muted);">
+                        <div style="font-size:3rem; margin-bottom:1rem; opacity:0.5;">⚙️</div>
+                        <p style="font-size:0.9rem;">Click on any glowing dot on the bike to customize that component.
+                        </p>
+                    </div>
+
+                    <!-- ENGINE -->
+                    <div class="part-section" id="section-engine">
+                        <div class="part-section-title">🔧 Engine Configuration</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Engine Type</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="engineType" data-val="single">Single Cylinder</div>
+                                <div class="option-chip" data-key="engineType" data-val="twin">Twin Cylinder</div>
+                                <div class="option-chip" data-key="engineType" data-val="inline-4">Inline-4</div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Displacement</div>
+                            <div class="range-group">
+                                <div class="range-value" id="displacement-val">100 – 500cc</div>
+                                <input type="range" id="displacement-min" min="100" max="1400" step="50" value="100" />
+                                <div class="range-labels"><span>100cc</span><span>1400cc</span></div>
+                            </div>
+                            <div class="range-group" style="margin-top:0.5rem;">
+                                <input type="range" id="displacement-max" min="100" max="1400" step="50" value="500" />
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Cooling</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="cooling" data-val="air">Air Cooled</div>
+                                <div class="option-chip" data-key="cooling" data-val="liquid">Liquid Cooled</div>
+                                <div class="option-chip" data-key="cooling" data-val="oil">Oil Cooled</div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Target Mileage</div>
+                            <div class="range-group">
+                                <div class="range-value" id="mileage-val">30+ kmpl</div>
+                                <input type="range" id="mileage-slider" min="10" max="80" step="5" value="30" />
+                                <div class="range-labels"><span>10 kmpl</span><span>80 kmpl</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FRAME -->
+                    <div class="part-section" id="section-frame">
+                        <div class="part-section-title">🔩 Frame & Structure</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Frame Type</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="frameType" data-val="diamond">Diamond</div>
+                                <div class="option-chip" data-key="frameType" data-val="trellis">Trellis</div>
+                                <div class="option-chip" data-key="frameType" data-val="perimeter">Perimeter</div>
+                                <div class="option-chip" data-key="frameType" data-val="steel-cradle">Steel Cradle</div>
+                                <div class="option-chip" data-key="frameType" data-val="aluminum">Aluminum</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUSPENSION -->
+                    <div class="part-section" id="section-suspension">
+                        <div class="part-section-title">🌀 Suspension Setup</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Front Suspension</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="frontSuspension" data-val="telescopic">Telescopic
+                                </div>
+                                <div class="option-chip" data-key="frontSuspension" data-val="USD">USD (Upside Down)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Rear Suspension</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="rearSuspension" data-val="mono">Mono Shock</div>
+                                <div class="option-chip" data-key="rearSuspension" data-val="twin-shock">Twin Shock
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BRAKES -->
+                    <div class="part-section" id="section-brakes">
+                        <div class="part-section-title">🛑 Braking System</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Front Brake</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="frontBrake" data-val="disc">Disc</div>
+                                <div class="option-chip" data-key="frontBrake" data-val="drum">Drum</div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Rear Brake</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="rearBrake" data-val="disc">Disc</div>
+                                <div class="option-chip" data-key="rearBrake" data-val="drum">Drum</div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">ABS</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="abs" data-val="true">Yes – ABS</div>
+                                <div class="option-chip" data-key="abs" data-val="false">No ABS</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHEELS -->
+                    <div class="part-section" id="section-wheels">
+                        <div class="part-section-title">⭕ Wheels & Tyres</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Wheel Type</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="wheelType" data-val="alloy">Alloy Wheels</div>
+                                <div class="option-chip" data-key="wheelType" data-val="spoked">Spoked Wheels</div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Wheel Size</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="wheelSize" data-val="17">17 inch</div>
+                                <div class="option-chip" data-key="wheelSize" data-val="18">18 inch</div>
+                                <div class="option-chip" data-key="wheelSize" data-val="19">19 inch</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FUEL -->
+                    <div class="part-section" id="section-fuel">
+                        <div class="part-section-title">⛽ Fuel System</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Fuel Delivery</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="fuelSystem" data-val="fuel-injected">Fuel Injected
+                                    (FI)</div>
+                                <div class="option-chip" data-key="fuelSystem" data-val="carbureted">Carbureted</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EXHAUST -->
+                    <div class="part-section" id="section-exhaust">
+                        <div class="part-section-title">💨 Exhaust System</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Exhaust Configuration</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="exhaustType" data-val="single">Single Exhaust</div>
+                                <div class="option-chip" data-key="exhaustType" data-val="dual">Dual Exhaust</div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Exhaust Type</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="exhaustSpec" data-val="standard">Standard</div>
+                                <div class="option-chip" data-key="exhaustSpec" data-val="performance">Performance</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEAT -->
+                    <div class="part-section" id="section-seat">
+                        <div class="part-section-title">🪑 Seat & Ergonomics</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Seat Type</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="seat" data-val="dual">Dual Seat</div>
+                                <div class="option-chip" data-key="seat" data-val="solo">Solo Seat</div>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <div class="option-group-label">Seat Height</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="seatHeight" data-val="low">Low (&lt;780mm)</div>
+                                <div class="option-chip" data-key="seatHeight" data-val="mid">Mid (780–820mm)</div>
+                                <div class="option-chip" data-key="seatHeight" data-val="high">High (&gt;820mm)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LIGHTS -->
+                    <div class="part-section" id="section-lights">
+                        <div class="part-section-title">💡 Lighting System</div>
+                        <div class="option-group">
+                            <div class="option-group-label">Headlight Type</div>
+                            <div class="option-chips">
+                                <div class="option-chip" data-key="lights" data-val="LED">Full LED</div>
+                                <div class="option-chip" data-key="lights" data-val="halogen">Halogen</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUMMARY -->
+                <div class="summary-section">
+                    <div class="summary-title">Your Configuration</div>
+                    <div class="summary-items" id="summary-items">
+                        <div class="summary-empty">No parts selected yet</div>
+                    </div>
+                    <button class="btn btn-primary" id="find-bike-btn" style="width:100%; justify-content:center;"
+                        disabled>
+                        🔍 Find My Bike
+                    </button>
+                    <button class="btn btn-ghost" id="reset-btn"
+                        style="width:100%; justify-content:center; margin-top:0.75rem; font-size:0.85rem;">
+                        ↺ Reset All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/builder.js"></script>
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+
+</html>
